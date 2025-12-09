@@ -23,16 +23,16 @@ You may claim any unclaimed track number between 12 and 254
 
 # Submission
 
-Please send me in a `.zip` or `.7z` file on Discord or Slipseer
+Send your submission as a `.zip` or `.7z` file on Discord or Slipseer
 
-| extension | purpose                                         |
-| :-------: | ----------------------------------------------- |
-|  `.bsp`   | compiled map file                               |
-|  `.lit`   | compiled lighting file                          |
-|  `.map`   | map source (the file you edited in TrenchBroom) |
-|  `.tga`   | your skybox textures                            |
-|  `.txt`   | a readme                                        |
-|  `.png`   | the textures you used                           |
+|  extension  | purpose                                         |
+| :---------: | ----------------------------------------------- |
+|   `.bsp`    | compiled map file                               |
+|   `.lit`    | compiled lighting file                          |
+|   `.map`    | map source (the file you edited in TrenchBroom) |
+|   `.tga`    | your skybox textures                            |
+| `.txt, .md` | a readme                                        |
+|   `.png`    | the textures you used                           |
 
 the README should include:
 
