@@ -18,19 +18,19 @@
 
 # Example CLI tool usage
 
-qpakman
+## qpakman
 
 ```shell
 qpakman textures/*.png -o textures.wad
 ```
 
-IrfanView
+## IrfanView
 
 ```shell
 "C:\Program Files (x86)\IrfanView\i_view32.exe" INPUTFOLDER\*.png /convert=OUTPUTFOLDER\*.tga
 ```
 
-ImageMagick
+## ImageMagick
 
 ```shell
 magick mogrify -path example/folder -format tga files/*.png
@@ -38,7 +38,17 @@ magick mogrify -path example/folder -format tga files/*.png
 
 # Guides
 
-You will have to rename your liquid textures on Windows, as `*` is an invalid filename character.
+## qpakman
+
+make sure to read the manual! RTFM!
+
+My workflow is to have a folder full of PNG files with proper filenames
+
+- suffix: `_fbr`, to allow fullbright colors to be used
+- prefix: `star_` = `*` -- for liquids, because `*` is an invalid file name on Windows.
+- prefix: `plus_` = `+` -- for animated textures
+- prefix: `minu_` = `-`
+- prefix: `divd_` = `/`
 
 ## Krita
 
@@ -91,7 +101,7 @@ Texture names have a character limit of 12 characters.
 
 They must be at least 16 x 16 pixels tall and wide, and the resolution must be a multiple of 8 (16, 32, 64, 128, 256, 512)
 
-Please keep your textures under 512 pixels in size.
+Please keep your textures at most 512 pixels in size, and keep your skybox TGA resolution per-face at most 1024 pixels.
 
 # Goals
 
