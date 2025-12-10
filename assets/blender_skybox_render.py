@@ -6,13 +6,31 @@ import bpy
 # lots of this code was just yoinked from my Spyro skyboxes project
 # https://github.com/spacehare/spyro-blender/tree/main
 
+#           FORWARD     RIGHT   UP
+# BLENDER   +Y          +X      +Z
+# QUAKE     +X          -Y      +Z
+
+BLENDER_FORWARD = (90, 0, 0)
+BLENDER_RIGHT = (90, 0, 270)
+BLENDER_UP = (180, 0, 0)
+BLENDER_BACK = (90, 0, 180)
+BLENDER_LEFT = (90, 0, 90)
+BLENDER_DOWN = (0, 0, 0)
+
+QUAKE_FORWARD = (90, 0, 270)
+QUAKE_RIGHT = (90, 0, 0)
+QUAKE_UP = (180, 0, 0)
+QUAKE_BACK = (90, 0, 90)
+QUAKE_LEFT = (90, 0, 180)
+QUAKE_DOWN = (0, 0, 0)
+
 rotations = {
-    "ft": (90, 0, 0),  # +Y
-    "rt": (90, 0, 90),  # +X
-    "bk": (90, 0, 180),  # -Y
-    "lf": (90, 0, 270),  # -X
-    "up": (180, 0, 90),  # +Z
-    "dn": (0, 0, 90),  # -Z
+    "ft": QUAKE_FORWARD,
+    "rt": QUAKE_RIGHT,
+    "bk": QUAKE_BACK,
+    "lf": QUAKE_LEFT,
+    "up": QUAKE_UP,
+    "dn": QUAKE_DOWN,
 }
 scene_camera = bpy.context.scene.camera
 output_path = Path.home() / Path(r"example/stem")
@@ -22,6 +40,7 @@ resolution = 1024
 def setup():
     bpy.context.scene.render.image_settings.file_format = "TARGA"
     camera = bpy.context.scene.camera
+    camera.rotation_mode = "XYZ"
     camera.data.lens = 18  # 90 FOV
     camera.data.clip_end = 10000
     camera.hide_select = True
@@ -29,8 +48,8 @@ def setup():
 
 def rotate(what, vector):
     what.rotation_euler.x = math.radians(vector[0])
-    what.rotation_euler.z = math.radians(vector[1])
-    what.rotation_euler.y = math.radians(vector[2])
+    what.rotation_euler.y = math.radians(vector[1])
+    what.rotation_euler.z = math.radians(vector[2])
 
 
 def render(output_file_path: Path, xy: int):
