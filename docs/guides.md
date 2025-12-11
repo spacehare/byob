@@ -90,7 +90,7 @@ Add nodes by right-clicking. Connect sockets by left-click dragging.
 
 # Palette
 
-The Quake palette has 256 colors. The last 16 indices are "fullbright" and ignore all lighting. The final index is used for transparent/fence textures that are prefixed `{`.
+The Quake palette has 256 colors. The last 32 indices are "fullbright" and ignore all lighting. The final index is used for transparent/fence textures that are prefixed `{`.
 
 - https://quakewiki.org/wiki/Quake_palette
 - https://lospec.com/palette-list/quake
