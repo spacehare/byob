@@ -6,9 +6,10 @@ import bpy
 # lots of this code was just yoinked from my Spyro skyboxes project
 # https://github.com/spacehare/spyro-blender/tree/main
 
-#           FORWARD     RIGHT   UP
-# BLENDER   +Y          +X      +Z
-# QUAKE     +X          -Y      +Z
+#           FORWARD     RIGHT       UP
+# Blender   +Y          +X          +Z
+# Quake     +X          -Y          +Z
+# env       rt          ft          up
 
 BLENDER_FORWARD = (90, 0, 0)
 BLENDER_RIGHT = (90, 0, 270)
