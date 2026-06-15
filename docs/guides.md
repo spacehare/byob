@@ -1,4 +1,35 @@
+# Textures
+
+https://quakewiki.org/wiki/Textures
+
+Texture names have a character limit of 16 characters.
+
+They must be at least 16 x 16 pixels tall and wide, and the resolution must be a multiple of 8 (16, 32, 64, 128, 256, 512)
+
+# Palette
+
+The Quake palette has 256 colors. Indexes start at 0, so the first color is at index 0 and the last is at index 255. The last 32 indices are "fullbright" and will always be... fully bright. The final index (255) is used for transparent/fence textures that are prefixed with `{`.
+
+- https://quakewiki.org/wiki/Quake_palette
+- https://lospec.com/palette-list/quake
+
+also take a look at this repo's [Palettes folder](../assets/palettes/). It has PNGs and KPL (Krita palette) files.
+
+<!-- Please keep your textures at most 512 pixels in size, and keep your skybox TGA resolution per-face at most 1024 pixels. -->
+
+# External Textures
+
+External textures allow you to use colors outside of the Quake palette. They should have identical file names to the texture names in the WAD. (example: `{window` in the WAD should be `{window.tga` in the textures folder)
+
+You want your textures in the mod folder like this: `id1/textures/byob_rabbit/`. A subfolder with your map's name will help if other mappers have a texture with the same name, to avoid overriding.
+
+The external textures should be in TGA format for engine compatability.
+
+The external file for a transparent texture should be prefixed with `#`, because on Windows you cannot have `*` in a file name. Quake only supports binary transparency (fully transparent, or fully visible). The external version of the texture should not use index 255 as the transparent color.
+
 # Tools
+
+make sure to read the manuals! RTFM!
 
 | Hyperlink                                                                                 | Purpose                           |
 | ----------------------------------------------------------------------------------------- | --------------------------------- |
@@ -12,10 +43,11 @@
 | [q1tools](https://q1tools.github.io/)                                                     | TGA conversion; many cool things! |
 | [IrfanView](https://www.irfanview.com/)                                                   | TGA conversion                    |
 | [ummjackson's tools](https://tools.ummjackson.com/)                                       | many cool things!                 |
+| [img2pixel](https://captain4lk.itch.io/slk-img2pixel)                                     | downscaler and palettizer         |
 
-make sure to read the manuals! RTFM!
+other cool tools
 
-https://quakewiki.org/wiki/Textures
+- [Error Diffused Quake Palettte Colour Lookup Tables for use with Substance Designer/Painter](https://www.slipseer.com/index.php?resources/error-diffused-quake-palettte-colour-lookup-tables-for-used-with-substance-designer-painter.156/)
 
 <!--
 - https://github.com/LibreSprite/LibreSprite (Tei)
@@ -27,37 +59,39 @@ https://quakewiki.org/wiki/Textures
 
 ## prototype texture WADs
 
+Here are some prototype texture WADs for reference. These include SKIP, TRIGGER, etc.
+
 - https://github.com/lavenderdotpet/LibreQuake/releases
 - https://www.slipseer.com/index.php?resources/prototype-wad.263/
 - https://www.slipseer.com/index.php?resources/tool-textures.258/
 
 # Example CLI tool usage
 
-I recommend making a BAT file so you can quickly recompile changes to your textures
-
 ## qpakman
 
-```shell
+I recommend making a BAT file so you can quickly recompile changes to your textures
+
+```ps1
 qpakman textures/*.png -o textures.wad
 ```
 
-```shell
+```ps1
 qpakman textures/* -o textures.wad
 ```
 
-```shell
+```ps1
 "I:\Quake\tools\qpakman-062b\qpakman.exe" textures/* -o textures.wad
 ```
 
 ## ImageMagick
 
-```shell
+```ps1
 magick mogrify -path example/folder -format tga -compress rle files/*.png
 ```
 
 ## IrfanView
 
-```shell
+```ps1
 "C:\Program Files (x86)\IrfanView\i_view32.exe" INPUTFOLDER\*.png /convert=OUTPUTFOLDER\*.tga
 ```
 
@@ -93,8 +127,6 @@ My workflow is to have a folder full of PNG files with proper filenames
 
 ## Material Maker
 
-> > nick nodes
-
 Add nodes by right-clicking. Connect sockets by left-click dragging.
 
 - Create a new file
@@ -112,6 +144,8 @@ Add nodes by right-clicking. Connect sockets by left-click dragging.
   - In the Preview2D window, click "export"
   - OR add an Export node, and use Quick Export (CTRL+SHIFT+E)
 
+The default Palettize node does not have very much customizability... i recommend checking [the assets folder](../assets/ptex/) for some custom nodes by nick_w100
+
 ## Blender
 
 You _can_ make tiling textures in Blender, but there will be some diagonal mirroring. It's good for also modelling out things like doors or windows (see jitspoe's video).
@@ -120,57 +154,3 @@ You _can_ make tiling textures in Blender, but there will be some diagonal mirro
 - [tiling textures with shader nodes](https://blender.stackexchange.com/questions/26692/how-do-i-create-repeating-patterns-with-cycles-procedural-textures)
 
 I set "Filter Size" to `0.0` and "Raw" for Color Management. There is [an example BLEND file](../assets/example_blend.blend) in the assets folder.
-
-# Palette
-
-The Quake palette has 256 colors. Indexes start at 0, so the first color is at index 0 and the last is at index 255. The last 32 indices are "fullbright" and ignore all lighting. The final index (255) is used for transparent/fence textures that are prefixed `{`.
-
-- https://quakewiki.org/wiki/Quake_palette
-- https://lospec.com/palette-list/quake
-
-[Palettes folder](../assets/palettes/)
-
-# Textures
-
-Texture names have a character limit of 16 characters.
-
-They must be at least 16 x 16 pixels tall and wide, and the resolution must be a multiple of 8 (16, 32, 64, 128, 256, 512)
-
-<!-- Please keep your textures at most 512 pixels in size, and keep your skybox TGA resolution per-face at most 1024 pixels. -->
-
-# External Textures
-
-External textures allow you to use colors outside of the Quake palette. They should have identical file names to the texture names in the WAD. (example: `window` in the WAD should be `{window.tga` in the textures folder)
-
-You want your textures in the mod folder like... `id1/textures/byob_rabbit/`. A subfolder with your map's name will help if other mappers have a texture with the same name, to avoid overriding.
-
-The external textures should be in TGA format for engine compatability.
-
-# Goals
-
-You should aim to make AT LEAST the number of textures listed. So if it says to make 3 textures, make 3 or more (`>=3`).
-
-## Dev and prototype textures
-
-- trigger
-- skip
-- clip
-- sky (256x128)
-- \*waterskip
-- \*lavaskip
-- \*slimeskip
-- region
-- antiregion
-
-## User-facing textures
-
-- 1 atlas texture?
-- 1 external texture
-- 1 animated texture (button) `+0` `+1`
-- 2 liquid textures `*`
-  - exit teleport portal
-  - water, slime, or lava
-- 1 transparent texture `{`
-- 7 regular textures (floors, walls, ceilings, whatever)
-- Skybox: 6 TGA Files (6 faces)
-  - suffixes: `[up, dn, lf, rt, ft, bk]`
