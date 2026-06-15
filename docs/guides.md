@@ -71,27 +71,27 @@ Here are some prototype texture WADs for reference. These include SKIP, TRIGGER,
 
 I recommend making a BAT file so you can quickly recompile changes to your textures
 
-```ps1
+```shell
 qpakman textures/*.png -o textures.wad
 ```
 
-```ps1
+```shell
 qpakman textures/* -o textures.wad
 ```
 
-```ps1
+```shell
 "I:\Quake\tools\qpakman-062b\qpakman.exe" textures/* -o textures.wad
 ```
 
 ## ImageMagick
 
-```ps1
+```shell
 magick mogrify -path example/folder -format tga -compress rle files/*.png
 ```
 
 ## IrfanView
 
-```ps1
+```shell
 "C:\Program Files (x86)\IrfanView\i_view32.exe" INPUTFOLDER\*.png /convert=OUTPUTFOLDER\*.tga
 ```
 
