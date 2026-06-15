@@ -1,27 +1,58 @@
 # Tools
 
-| Hyperlink                                                                                 | Purpose                          |
-| ----------------------------------------------------------------------------------------- | -------------------------------- |
-| [Krita](https://krita.org)                                                                | Creating textures                |
-| [Material Maker](https://www.materialmaker.org/)                                          | Creating textures                |
-| [Blender](https://www.blender.org/)                                                       | Creating textures                |
-| [Wally 157](https://github.com/Ty-Matthews-VisualStudio/Wally)                            | Creating textures, packing WADs  |
-| [qpakman 062b](https://www.quaddicted.com/files/tools/qpakman-062b.zip) (direct download) | packing WADs                     |
-| [q1tools](https://q1tools.github.io/)                                                     | File conversion (ex: PNG -> TGA) |
-| [ImageMagick](https://imagemagick.org/)                                                   | File conversion (ex: PNG -> TGA) |
-| [IrfanView](https://www.irfanview.com/)                                                   | File conversion (ex: PNG -> TGA) |
+| Hyperlink                                                                                 | Purpose                           |
+| ----------------------------------------------------------------------------------------- | --------------------------------- |
+| [Krita](https://krita.org)                                                                | Creating textures                 |
+| [Material Maker](https://www.materialmaker.org/)                                          | Creating textures                 |
+| [Blender](https://www.blender.org/)                                                       | Creating textures                 |
+| [LibreSprite](https://github.com/LibreSprite/LibreSprite)                                 | Creating textures                 |
+| [Wally 157](https://github.com/Ty-Matthews-VisualStudio/Wally/releases/tag/WallyDev)      | Creating textures, packing WADs   |
+| [qpakman 062b](https://www.quaddicted.com/files/tools/qpakman-062b.zip) (direct download) | packing WADs                      |
+| [ImageMagick](https://imagemagick.org/)                                                   | TGA conversion                    |
+| [q1tools](https://q1tools.github.io/)                                                     | TGA conversion; many cool things! |
+| [IrfanView](https://www.irfanview.com/)                                                   | TGA conversion                    |
+| [ummjackson's tools](https://tools.ummjackson.com/)                                       | many cool things!                 |
 
+make sure to read the manuals! RTFM!
+
+https://quakewiki.org/wiki/Textures
+
+<!--
 - https://github.com/LibreSprite/LibreSprite (Tei)
-- https://captain4lk.itch.io/slk-img2pixel (Ashat Maself)
+- https://captain4lk.itch.io/slk-img2pixel (Ashat Maself) (great username)
   - https://github.com/Captain4LK/SoftLK-tools
 - https://www.slipseer.com/index.php?resources/error-diffused-quake-palettte-colour-lookup-tables-for-used-with-substance-designer-painter.156/
+- https://www.youtube.com/watch?v=eyNAYiVn0nM Spyro sky panorama
+-->
+
+## prototype texture WADs
+
+- https://github.com/lavenderdotpet/LibreQuake/releases
+- https://www.slipseer.com/index.php?resources/prototype-wad.263/
+- https://www.slipseer.com/index.php?resources/tool-textures.258/
 
 # Example CLI tool usage
+
+I recommend making a BAT file so you can quickly recompile changes to your textures
 
 ## qpakman
 
 ```shell
 qpakman textures/*.png -o textures.wad
+```
+
+```shell
+qpakman textures/* -o textures.wad
+```
+
+```shell
+"I:\Quake\tools\qpakman-062b\qpakman.exe" textures/* -o textures.wad
+```
+
+## ImageMagick
+
+```shell
+magick mogrify -path example/folder -format tga -compress rle files/*.png
 ```
 
 ## IrfanView
@@ -30,17 +61,9 @@ qpakman textures/*.png -o textures.wad
 "C:\Program Files (x86)\IrfanView\i_view32.exe" INPUTFOLDER\*.png /convert=OUTPUTFOLDER\*.tga
 ```
 
-## ImageMagick
-
-```shell
-magick mogrify -path example/folder -format tga files/*.png
-```
-
 # Guides
 
 ## qpakman
-
-make sure to read the manual! RTFM!
 
 My workflow is to have a folder full of PNG files with proper filenames
 
@@ -49,13 +72,14 @@ My workflow is to have a folder full of PNG files with proper filenames
 - prefix: `plus_` = `+` -- for animated textures
 - prefix: `minu_` = `-`
 - prefix: `divd_` = `/`
+- prefix: `{` -- transparent textures
 
 ## Krita
 
 - Create a new file
 - For tiling textures, enable Wrap-Around mode (SHIFT+W)
 - add a paint layer (ALT+L; N; P)
-- Load the quake palette in the Palette dock (ALT+N; D; Select "Palette")
+- Load the Quake palette `.kpl` in the Palette dock (ALT+N; D; Select "Palette")
   - Click the little palette button
   - Click the left-facing arrow icon, "Import new palette from file"
 - add a filter layer (ALT+L; N; F)
@@ -68,6 +92,8 @@ My workflow is to have a folder full of PNG files with proper filenames
     - set the "Transparent color" to hex `#9f5b53` or RGB `159, 91, 83` (palette index 255)
 
 ## Material Maker
+
+> > nick nodes
 
 Add nodes by right-clicking. Connect sockets by left-click dragging.
 
@@ -82,26 +108,43 @@ Add nodes by right-clicking. Connect sockets by left-click dragging.
 - Connect the Image's Output to the Palettize's Palette socket
 - Connect Colorize's input to Palettize's Input
 - Connect the Palettize's Output to the PBR's Albedo socket
-- Export your texture as a Blender material to get a PNG
+- Export your texture
+  - In the Preview2D window, click "export"
+  - OR add an Export node, and use Quick Export (CTRL+SHIFT+E)
 
 ## Blender
 
-++ tiling textures with TAU
+You _can_ make tiling textures in Blender, but there will be some diagonal mirroring. It's good for also modelling out things like doors or windows (see jitspoe's video).
+
+- [jitspoe tutorial](https://www.youtube.com/watch?v=b5taIvtQOXQ)
+- [tiling textures with shader nodes](https://blender.stackexchange.com/questions/26692/how-do-i-create-repeating-patterns-with-cycles-procedural-textures)
+
+I set "Filter Size" to `0.0` and "Raw" for Color Management. There is [an example BLEND file](../assets/example_blend.blend) in the assets folder.
 
 # Palette
 
-The Quake palette has 256 colors. The last 32 indices are "fullbright" and ignore all lighting. The final index is used for transparent/fence textures that are prefixed `{`.
+The Quake palette has 256 colors. Indexes start at 0, so the first color is at index 0 and the last is at index 255. The last 32 indices are "fullbright" and ignore all lighting. The final index (255) is used for transparent/fence textures that are prefixed `{`.
 
 - https://quakewiki.org/wiki/Quake_palette
 - https://lospec.com/palette-list/quake
 
+[Palettes folder](../assets/palettes/)
+
 # Textures
 
-Texture names have a character limit of 12 characters.
+Texture names have a character limit of 16 characters.
 
 They must be at least 16 x 16 pixels tall and wide, and the resolution must be a multiple of 8 (16, 32, 64, 128, 256, 512)
 
-Please keep your textures at most 512 pixels in size, and keep your skybox TGA resolution per-face at most 1024 pixels.
+<!-- Please keep your textures at most 512 pixels in size, and keep your skybox TGA resolution per-face at most 1024 pixels. -->
+
+# External Textures
+
+External textures allow you to use colors outside of the Quake palette. They should have identical file names to the texture names in the WAD. (example: `window` in the WAD should be `{window.tga` in the textures folder)
+
+You want your textures in the mod folder like... `id1/textures/byob_rabbit/`. A subfolder with your map's name will help if other mappers have a texture with the same name, to avoid overriding.
+
+The external textures should be in TGA format for engine compatability.
 
 # Goals
 
@@ -122,6 +165,7 @@ You should aim to make AT LEAST the number of textures listed. So if it says to 
 ## User-facing textures
 
 - 1 atlas texture?
+- 1 external texture
 - 1 animated texture (button) `+0` `+1`
 - 2 liquid textures `*`
   - exit teleport portal
