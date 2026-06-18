@@ -25,7 +25,7 @@ You want your textures in the mod folder like this: `id1/textures/byob_rabbit/`.
 
 The external textures should be in TGA format for engine compatability.
 
-The external file for a transparent texture should be prefixed with `#`, because on Windows you cannot have `*` in a file name. Quake only supports binary transparency (fully transparent, or fully visible). The external version of the texture should not use index 255 as the transparent color.
+The external file for a transparent texture should be prefixed with `#`, because on Windows you cannot have `*` in a file name. The external version of the texture should not use index 255 as the transparent color.
 
 # Tools
 
