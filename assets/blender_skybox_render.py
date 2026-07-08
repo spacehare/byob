@@ -40,6 +40,7 @@ resolution = 1024
 
 def setup():
     bpy.context.scene.render.image_settings.file_format = "TARGA"
+    bpy.context.scene.render.image_settings.color_mode = "RGB"
     camera = bpy.context.scene.camera
     camera.rotation_mode = "XYZ"
     camera.data.lens = 18  # 90 FOV
