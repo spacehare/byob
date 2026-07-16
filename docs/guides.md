@@ -2,7 +2,7 @@
 
 https://quakewiki.org/wiki/Textures
 
-Texture names have a character limit of 16 characters.
+Texture names have a character limit of 15 characters.
 
 They must be at least 16 x 16 pixels tall and wide, and the resolution must be a multiple of 8 (16, 32, 64, 128, 256, 512)
 
